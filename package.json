@@ -6,14 +6,17 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "test": "echo \"No tests configured yet\" && exit 0"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
+    "gray-matter": "^4.0.3",
     "next": "15.5.0",
     "next-mdx-remote": "^5.0.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "resend": "^6.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
