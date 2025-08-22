@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import ProjectsContent from '../../components/ProjectsContent';
+import ProjectsContent from '@/components/ProjectsContent';
 
 export default function Projects() {
   return (

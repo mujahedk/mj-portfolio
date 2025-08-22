@@ -1,17 +1,18 @@
 import { notFound } from 'next/navigation';
-import { getWriteupBySlug, getWriteups } from '../../../lib/mdx';
+import { getWriteupBySlug, getWriteups } from '@/lib/mdx';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
 interface WriteupPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: WriteupPageProps): Promise<Metadata> {
-  const writeup = await getWriteupBySlug(params.slug);
+  const { slug } = await params;
+  const writeup = await getWriteupBySlug(slug);
   
   if (!writeup) {
     return {
@@ -48,7 +49,8 @@ export async function generateStaticParams() {
 }
 
 export default async function WriteupPage({ params }: WriteupPageProps) {
-  const writeup = await getWriteupBySlug(params.slug);
+  const { slug } = await params;
+  const writeup = await getWriteupBySlug(slug);
 
   if (!writeup) {
     notFound();

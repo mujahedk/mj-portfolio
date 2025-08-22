@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import InfoCard from '../../components/InfoCard';
-import SkillGroup from '../../components/SkillGroup';
-import { skills } from '../../data/skills';
+import InfoCard from '@/components/InfoCard';
+import SkillGroup from '@/components/SkillGroup';
+import { skills } from '@/data/skills';
 
 export default function About() {
   return (

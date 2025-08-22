@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { site } from '../../../config/site';
+import { site } from '@/config/site';
 
 // Simple in-memory rate limiting
 const rateLimitMap = new Map<string, number>();

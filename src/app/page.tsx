@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import ProjectCard from '../components/ProjectCard';
-import { getFeatured } from '../lib/projects';
-import { getWriteups } from '../lib/mdx';
-import CTAButton from '../components/CTAButton';
+import ProjectCard from '@/components/ProjectCard';
+import { getFeatured } from '@/lib/projects';
+import { getWriteups } from '@/lib/mdx';
+import CTAButton from '@/components/CTAButton';
 
 export default async function Home() {
   // Get featured projects

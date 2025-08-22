@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import WriteupsContent from '../../components/WriteupsContent';
+import WriteupsContent from '@/components/WriteupsContent';
 
 export default function Writeups() {
   return (

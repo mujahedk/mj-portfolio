@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import ProjectCard from './ProjectCard';
 import TagFilter from './TagFilter';
-import { projects } from '../data/projects';
+import { projects } from '@/data/projects';
 
 export default function ProjectsContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');

@@ -43,6 +43,10 @@ RESEND_API_KEY=re_1234567890abcdef...
 
 **Note**: If `RESEND_API_KEY` is not set, the contact form will automatically fall back to opening the user's email client with a pre-filled message.
 
+### Troubleshooting
+
+**Hydration Warnings**: If you still see hydration warnings with `--vsc-domain`, try an Incognito window or disable extensions (VS Code Live Preview) that inject styles before hydration.
+
 ### Available Scripts
 
 ```bash

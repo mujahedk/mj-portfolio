@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getWriteups } from '../lib/mdx';
+import { getWriteups } from '@/lib/mdx';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://mj-portfolio.vercel.app';

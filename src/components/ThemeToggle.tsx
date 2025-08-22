@@ -1,22 +1,34 @@
 "use client";
-import {useEffect, useState} from "react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light"|"dark">("light");
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch by only rendering after mount
   useEffect(() => {
-    const stored = localStorage.getItem("theme") as "light"|"dark"|null;
-    const initial = stored ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    setTheme(initial);
-    document.documentElement.classList.toggle("dark", initial === "dark");
+    setMounted(true);
   }, []);
-  function toggle() {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    localStorage.setItem("theme", next);
-    document.documentElement.classList.toggle("dark", next === "dark");
+
+  if (!mounted) {
+    return (
+      <button className="rounded-xl border px-3 py-1 text-sm">
+        ☀️ Theme
+      </button>
+    );
   }
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <button onClick={toggle} className="rounded-xl border px-3 py-1 text-sm">
+    <button 
+      onClick={toggleTheme} 
+      className="rounded-xl border px-3 py-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+    >
       {theme === "dark" ? "🌙" : "☀️"} Theme
     </button>
   );

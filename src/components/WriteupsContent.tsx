@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import TagFilter from './TagFilter';
-import { getWriteups, getAllTags, WriteupMeta } from '../lib/mdx';
+import { getWriteups, getAllTags, WriteupMeta } from '@/lib/mdx';
 
 export default function WriteupsContent() {
   const [selectedTag, setSelectedTag] = useState('All');

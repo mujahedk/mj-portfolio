@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { site } from '../../config/site';
+import { site } from '@/config/site';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
