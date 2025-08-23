@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import ProjectCard from '@/components/ProjectCard';
 import ProjectCarousel from '@/components/ProjectCarousel';
 import { projects } from '@/data/projects';
 import { getWriteups } from '@/lib/mdx';

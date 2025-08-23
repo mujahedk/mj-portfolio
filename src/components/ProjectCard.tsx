@@ -1,16 +1,13 @@
-import Link from 'next/link';
 import Image from 'next/image';
 
 interface ProjectCardProps {
   title: string;
   tags: string[];
   summary: string;
-  repo?: string;
-  liveUrl?: string;
   image?: string;
 }
 
-export default function ProjectCard({ title, tags, summary, repo, liveUrl, image }: ProjectCardProps) {
+export default function ProjectCard({ title, tags, summary, image }: ProjectCardProps) {
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-shadow duration-300 overflow-hidden">
       {/* Project Image */}

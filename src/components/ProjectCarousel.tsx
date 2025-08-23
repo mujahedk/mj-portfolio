@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ProjectCard from './ProjectCard';
 import { Project } from '@/data/projects';
 
@@ -66,15 +66,15 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
   const { projectsPerView, maxIndex, showArrows } = getNavigationInfo();
   
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     const newIndex = currentIndex === 0 ? maxIndex : currentIndex - 1;
     setCurrentIndex(newIndex);
-  };
+  }, [currentIndex, maxIndex]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     const newIndex = currentIndex === maxIndex ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
-  };
+  }, [currentIndex, maxIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -90,11 +90,11 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentIndex, maxIndex, viewport]); // Include all dependencies
+  }, [goToPrevious, goToNext]);
 
   // Get the current projects to display
   const getCurrentProjects = () => {
-    let currentProjects = limitedProjects.slice(currentIndex, currentIndex + projectsPerView);
+    const currentProjects = limitedProjects.slice(currentIndex, currentIndex + projectsPerView);
     
     // If we have less than needed, pad with the first ones
     while (currentProjects.length < projectsPerView && limitedProjects.length > 0) {
@@ -149,8 +149,6 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
             title={project.title}
             tags={project.tags}
             summary={project.summary}
-            repo={project.repo}
-            liveUrl={project.liveUrl}
             image={project.image}
           />
         ))}

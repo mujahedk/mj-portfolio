@@ -123,8 +123,6 @@ export default function ProjectsContent() {
                 title={project.title}
                 tags={project.tags}
                 summary={project.summary}
-                repo={project.repo}
-                liveUrl={project.liveUrl}
                 image={project.image}
               />
             ))}
