@@ -1,214 +1,203 @@
 # MJ Portfolio
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A modern, responsive personal portfolio website built with Next.js 15, showcasing projects, technical writeups, and professional experience. This site represents MJ (Mujahedulislam Khan), a CS graduate and full-stack developer passionate about building secure, scalable applications and sharing knowledge through detailed technical documentation.
 
-A personal portfolio showcasing projects, notes, and research by MJ - a CS grad and full-stack developer who loves turning ideas into working products.
+## 🚀 About MJ
 
-## Getting Started
+**MJ** is a Computer Science graduate and full-stack developer who loves turning ideas into working products. With expertise in both frontend and backend development, MJ focuses on:
 
-First, run the development server:
+- **Development**: Building secure, scalable applications with modern technologies and best practices
+- **Research**: Exploring new technologies, conducting experiments, and improving application quality  
+- **Knowledge Sharing**: Documenting learnings through detailed technical writeups and research findings
 
+### Core Skills
+- **Frontend**: React/Next.js, Tailwind CSS, accessibility & keyboard support
+- **Backend**: FastAPI/Express, Postgres/Prisma, authentication & validation
+- **DevOps**: CI/CD, Docker, OpenTelemetry, health checks
+- **Testing**: pytest/Jest, comprehensive test coverage
+- **Security**: Building security and testing in from the start
+
+## 🌐 Site Overview
+
+This portfolio website serves as a comprehensive showcase of MJ's work, skills, and professional journey. The site features a modern design with dark/light theme support, responsive layouts, and smooth user interactions.
+
+### Tech Stack
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS 4 with custom theme system
+- **Language**: TypeScript
+- **Deployment**: Vercel-ready with optimized builds
+- **Email**: Resend API integration for contact forms
+- **Content**: MDX support for technical writeups
+
+## 📱 Site Structure & Content
+
+### 🏠 **Home Page** (`/`)
+The main landing page featuring:
+- **Hero Section**: Personal introduction with call-to-action buttons
+- **What I Do**: Three core focus areas (Development, Research, Writeups)
+- **Featured Projects**: Interactive project carousel showcasing recent work
+- **Latest Writeups**: Recent technical notes and research findings
+- **Quick Navigation**: Direct links to About, Projects, Notes, and Contact
+
+### 👤 **About Page** (`/about`)
+Comprehensive professional overview including:
+- **Personal Introduction**: Professional headshot and background story
+- **Core Competencies**: Four main skill areas with detailed breakdowns
+  - Frontend: Accessible, fast UIs with React/Next.js + Tailwind
+  - Backend: Typed APIs with auth & comprehensive testing
+  - Product: User-centered development with metrics-driven iteration
+  - Reliability: CI/CD, monitoring, and operational excellence
+- **Skill Groups**: Organized technical skills by category
+- **Professional Journey**: Current focus and learning objectives
+
+### 💼 **Projects Page** (`/projects`)
+Showcase of development work featuring:
+- **Project Grid**: Visual cards displaying completed projects
+- **Filtering System**: Tag-based filtering by technology and project type
+- **Project Details**: Each project includes:
+  - Project images and descriptions
+  - Technology stack and tools used
+  - Live demos and source code links
+  - Key features and accomplishments
+- **Interactive Elements**: Hover effects and smooth transitions
+
+### 📝 **Writeups Page** (`/notes`)
+Technical documentation and research sharing:
+- **Content Library**: MDX-powered technical writeups
+- **Research Findings**: Detailed documentation of experiments and learnings
+- **Knowledge Base**: Organized collection of technical insights
+- **Search & Filter**: Easy navigation through different topics and categories
+- **Rich Content**: Support for code blocks, images, and interactive elements
+
+### 📧 **Contact Page** (`/contact`)
+Professional communication hub featuring:
+- **Contact Form**: Integrated form with Resend API for direct email delivery
+- **Direct Email**: Quick mailto: link for immediate contact
+- **Professional Information**: Clear communication channels and response times
+- **Form Validation**: Comprehensive error handling and user feedback
+- **Accessibility**: Keyboard navigation and screen reader support
+
+## 🎨 Design Features
+
+### Theme System
+- **Dark Theme Default**: Deep navy backgrounds with light text
+- **Light Theme Option**: Clean white backgrounds with dark text
+- **Smooth Transitions**: Seamless theme switching with CSS variables
+- **Consistent Design**: Unified color scheme across all components
+
+### Responsive Design
+- **Mobile-First**: Optimized for all device sizes
+- **Modern UI**: Clean, professional aesthetic with subtle animations
+- **Accessibility**: WCAG compliant with keyboard navigation support
+- **Performance**: Optimized images and lazy loading
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ 
+- npm, yarn, pnpm, or bun
+
+### Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Clone the repository
+git clone <repository-url>
+cd mj-portfolio
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-## Environment Configuration
-
-### Contact Form Email Service (Optional)
-
-The contact form supports both `mailto:` fallback and serverless email sending via [Resend](https://resend.com).
-
-To enable serverless email sending:
-
-1. Sign up for a free account at [Resend](https://resend.com)
-2. Get your API key from the dashboard
-3. Create a `.env.local` file in the project root:
-
-```bash
-# .env.local
-RESEND_API_KEY=re_1234567890abcdef...
-```
-
-4. Verify your domain in Resend (or use the default sandbox domain for testing)
-
-**Note**: If `RESEND_API_KEY` is not set, the contact form will automatically fall back to opening the user's email client with a pre-filled message.
-
-### Troubleshooting
-
-**Hydration Warnings**: If you still see hydration warnings with `--vsc-domain`, try an Incognito window or disable extensions (VS Code Live Preview) that inject styles before hydration.
-
-### Available Scripts
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run lint         # Run ESLint
-npm start            # Start production server
-```
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## 🚀 Quick Start
-
-```bash
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
+### Available Scripts
+```bash
+npm run dev          # Start development server
+npm run dev:turbo    # Start with Turbopack (faster)
+npm run build        # Build for production
+npm run build:turbo  # Build with Turbopack
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run clean        # Clean and reinstall dependencies
+```
+
 ## 📧 Contact Form Setup
 
-The contact form uses [Resend](https://resend.com) to send emails directly to your inbox. To enable this functionality:
+The contact form uses [Resend](https://resend.com) for reliable email delivery:
 
-### 1. Get a Resend API Key
+### 1. Get Resend API Key
 1. Sign up at [resend.com](https://resend.com)
-2. Go to API Keys section
-3. Create a new API key
-4. Copy the API key
+2. Create a new API key in the dashboard
+3. Copy the API key
 
-### 2. Set Environment Variable
+### 2. Environment Configuration
 Create a `.env.local` file in your project root:
-
 ```bash
-# .env.local
 RESEND_API_KEY=your_resend_api_key_here
 ```
 
-### 3. Verify Email Sending
-- The form will now send emails directly to `mujahedk@umich.edu`
-- No more opening mail apps - emails are sent automatically
-- Includes rate limiting and validation
-- Fallback to direct email button if API fails
+### 3. Features
+- Direct email delivery to `mujahedk@umich.edu`
+- Rate limiting and validation
+- Fallback to mailto: if API fails
+- Professional email formatting
 
-### 4. Custom Domain (Optional)
-Once you verify your domain with Resend, you can update the `from` address in `src/app/api/contact/route.ts`:
+## 🌐 Deployment
 
-```typescript
-from: 'Portfolio Contact <noreply@yourdomain.com>'
+### Vercel (Recommended)
+```bash
+npm run build
+# Deploy to Vercel for optimal Next.js performance
 ```
 
-## Theme Implementation QA Checklist
+### Other Platforms
+The site is built with standard Next.js and can be deployed to any platform supporting Node.js applications.
 
-### ✅ Theme Provider Setup
-- [x] `next-themes` installed and configured
-- [x] `ThemeProvider` with `defaultTheme="dark"` and `enableSystem={false}`
-- [x] `suppressHydrationWarning` on `<html>` element
-- [x] No hydration warnings in console
+## 📚 Content Management
 
-### ✅ Theme Tokens (CSS Variables)
-- [x] Light theme variables defined (`:root`)
-- [x] Dark theme variables defined (`.dark`)
-- [x] All components using `var(--bg)`, `var(--text)`, `var(--surface)`, etc.
-- [x] No hardcoded colors remaining
+### Projects
+Add new projects by editing `src/data/projects.ts`:
+```typescript
+export const projects: Project[] = [
+  {
+    id: "project-name",
+    title: "Project Title",
+    description: "Project description...",
+    // ... other fields
+  }
+];
+```
 
-### ✅ Default Dark Theme
-- [x] Site loads in dark theme by default
-- [x] Deep navy background (`#0b1220`)
-- [x] Light text (`#e5e7eb`)
-- [x] Translucent surfaces with backdrop blur
-- [x] Header/footer use dark theme colors
+### Writeups
+Add new technical writeups as MDX files in `src/content/writeups/`:
+```markdown
+---
+title: "Writeup Title"
+date: "2024-01-01"
+tags: ["tag1", "tag2"]
+---
 
-### ✅ Light Theme Toggle
-- [x] Theme toggle button visible and functional
-- [x] Clicking toggle switches to light theme
-- [x] White background (`#ffffff`)
-- [x] Dark text (`#0f172a`)
-- [x] Light blue surfaces (`#d1e7ff`)
-- [x] Header/footer become darker blue
+Your content here...
+```
 
-### ✅ Component Updates
-- [x] Header component uses theme tokens
-- [x] Footer component uses theme tokens
-- [x] CTAButton component uses theme tokens
-- [x] ProjectCard component uses theme tokens
-- [x] InfoCard component uses theme tokens
-- [x] SkillGroup component uses theme tokens
-- [x] TagFilter component uses theme tokens
-- [x] All page components updated
+## 🤝 Contributing
 
-### ✅ Page Updates
-- [x] Home page uses theme tokens
-- [x] About page uses theme tokens
-- [x] Projects page uses theme tokens
-- [x] Writeups page uses theme tokens
-- [x] Contact page uses theme tokens
+This is a personal portfolio site, but feedback and suggestions are welcome. Feel free to:
+- Report bugs or issues
+- Suggest improvements to the design or functionality
+- Share ideas for new features
 
-### ✅ Visual Consistency
-- [x] All cards use `bg-[var(--surface)]` and `border-[var(--border)]`
-- [x] All text uses `text-[var(--text)]` or `text-[var(--muted)]`
-- [x] All buttons use `bg-[var(--primary)]` and `hover:bg-[var(--primary-hover)]`
-- [x] Smooth transitions between themes
-- [x] No color flashing during theme switch
+## 📄 License
 
-### 🧪 Manual Testing Steps
+This project is private and personal. All rights reserved.
 
-1. **Default Load Test**
-   - Refresh page → should load in dark theme
-   - Verify deep navy background and light text
-   - Check header/footer are dark with blur effect
+---
 
-2. **Light Theme Test**
-   - Click theme toggle → should switch to light theme
-   - Verify white background and dark text
-   - Check header/footer are darker blue
-   - All cards should be darker blue surfaces
+**Connect with MJ:**
+- 📧 Email: [mujahedk@umich.edu](mailto:mujahedk@umich.edu)
+- 💼 LinkedIn: [Mujahedulislam Khan](https://www.linkedin.com/in/mujahedulislamkhan/)
+- 🐙 GitHub: [mujahedk](https://github.com/mujahedk)
 
-3. **Dark Theme Test**
-   - Click theme toggle again → should return to dark
-   - Verify deep navy background returns
-   - Check all colors revert properly
-
-4. **Hydration Test**
-   - Open browser console
-   - Refresh page multiple times
-   - Verify no hydration warnings appear
-
-5. **Component Consistency Test**
-   - Navigate to all pages (Home, About, Projects, Writeups, Contact)
-   - Verify theme consistency across all components
-   - Check that all cards, buttons, and text use theme tokens
-
-6. **Contact Form Test**
-   - Fill out and submit the contact form
-   - Verify email is sent to your inbox (with Resend API key configured)
-   - Check error handling if API fails
-
-### 🎨 Theme Colors
-
-**Light Theme:**
-- Background: `#ffffff` (white)
-- Text: `#0f172a` (slate-900)
-- Surface: `#d1e7ff` (darker light blue)
-- Header/Footer: `#c7e1ff` (darker blue)
-
-**Dark Theme:**
-- Background: `#0b1220` (deep navy)
-- Text: `#e5e7eb` (slate-200)
-- Surface: `rgba(15,23,42,.6)` (translucent slate)
-- Header/Footer: `rgba(11,18,32,.8)` (dark with blur)
+*Built with Next.js, TypeScript, and Tailwind CSS*
