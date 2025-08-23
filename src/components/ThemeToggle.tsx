@@ -29,7 +29,7 @@ export default function ThemeToggle() {
       className="rounded-xl border px-3 py-1 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
       aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
     >
-      {theme === "dark" ? "🌙 " : "☀️ "} Theme
+      {theme === "dark" ? "🌙" : "☀️"} Theme
     </button>
   );
 }
