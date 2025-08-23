@@ -11,7 +11,9 @@ export type Project = {
 export const projects: Project[] = [
   { title: "PROJECT NAME", summary: "PROJECT DESCRIPTION", tags: ["frontend","full-stack"], image: "/images/sample-project-1.jpg", featured: true },
   { title: "PROJECT NAME 2", summary: "PROJECT DESCRIPTION", tags: ["backend"], image: "/images/sample-project-2.jpg", featured: true },
-  { title: "PROJECT NAME 3", summary: "PROJECT DESCRIPTION", tags: ["ai"], image: "/images/sample-project-3.jpg" }
+  { title: "PROJECT NAME 3", summary: "PROJECT DESCRIPTION", tags: ["ai"], image: "/images/sample-project-3.jpg" },
+  { title: "E-Commerce Platform", summary: "A full-stack e-commerce solution built with Next.js, featuring user authentication, product management, shopping cart functionality, and secure payment processing.", tags: ["full-stack", "next.js", "typescript"], image: "/images/sample-project-1.jpg" },
+  { title: "Task Management App", summary: "A collaborative task management application with real-time updates, drag-and-drop functionality, team collaboration features, and progress tracking.", tags: ["frontend", "react", "real-time"], image: "/images/sample-project-2.jpg" }
 ];
 
 export const categories = ["All", "Frontend", "Full-Stack", "Backend"];

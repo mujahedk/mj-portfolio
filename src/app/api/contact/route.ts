@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
   if (!process.env.RESEND_API_KEY) {
     console.error('RESEND_API_KEY is not set. Email service is unavailable.');
     return NextResponse.json(
-      { error: 'Email service not configured' },
+      { error: 'Email service not configured. Please contact me directly via email.' },
       { status: 503 }
     );
   }
@@ -86,8 +86,9 @@ export async function POST(request: NextRequest) {
   // Send email using Resend
   try {
     const emailResult = await resend.emails.send({
-      from: 'Portfolio Contact <noreply@mj-portfolio.vercel.app>', // Replace with your verified domain
+      from: 'Portfolio Contact <onboarding@resend.dev>', // Use Resend's default domain for testing
       to: [site.email],
+      replyTo: email, // Allow direct reply to the sender
       subject: `Portfolio Contact: Message from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -96,7 +97,7 @@ export async function POST(request: NextRequest) {
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Message:</strong></p>
           <p style="border: 1px solid #eee; padding: 10px; border-radius: 5px; background-color: #f9f9f9;">
-            ${message}
+            ${message.replace(/\n/g, '<br>')}
           </p>
           <p style="font-size: 0.8em; color: #777;">This email was sent from your portfolio contact form.</p>
         </div>
@@ -105,6 +106,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (emailResult.data) {
+      console.log('Email sent successfully:', emailResult.data);
       return NextResponse.json({ message: 'Email sent successfully!' });
     } else {
       console.error('Resend email error:', emailResult.error);

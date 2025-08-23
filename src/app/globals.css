@@ -1,70 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --popover: #ffffff;
-  --popover-foreground: #171717;
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #2563eb;
-  --radius: 0.5rem;
-}
+@layer base {
+  :root {
+    /* LIGHT THEME (activated when html has no .dark) */
+    --bg:            #ffffff;
+    --text:          #0f172a;   /* slate-900 */
+    --muted:         #475569;   /* slate-600 */
+    --surface:       #d1e7ff;   /* darker light blue card */
+    --surface-hover: #b8d9f7;   /* slightly deeper darker light blue */
+    --header:        #c7e1ff;   /* darker blue header/footer bg */
+    --border:        #cbd5e1;   /* slate-300 */
+    --link:          #1d4ed8;   /* blue-700 */
+    --link-hover:    #1e40af;   /* blue-800 */
+    --primary:       #3b82f6;   /* blue-500 */
+    --primary-hover: #2563eb;   /* blue-600 */
+  }
 
-.dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
-  --popover: #1e293b;
-  --popover-foreground: #f8fafc;
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
-  --secondary: #334155;
-  --secondary-foreground: #f1f5f9;
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
-  --accent: #334155;
-  --accent-foreground: #f1f5f9;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #475569;
-  --input: #475569;
-  --ring: #3b82f6;
+  .dark {
+    /* DARK THEME */
+    --bg:            #0b1220;   /* deep navy */
+    --text:          #e5e7eb;   /* slate-200 */
+    --muted:         #94a3b8;   /* slate-400 */
+    --surface:       rgba(15,23,42,.6);  /* translucent slate-900 */
+    --surface-hover: rgba(30,41,59,.7);
+    --header:        rgba(11,18,32,.8);  /* darker header/footer bg closer to background */
+    --border:        #1f2937;   /* slate-800 */
+    --link:          #93c5fd;   /* blue-300 */
+    --link-hover:    #bfdbfe;   /* blue-200 */
+    --primary:       #60a5fa;   /* blue-400 */
+    --primary-hover: #3b82f6;   /* blue-500 */
+  }
+
+  html { color-scheme: light dark; }
+  body { background: var(--bg); color: var(--text); }
+  a { color: var(--link); }
+  a:hover { color: var(--link-hover); }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--text);
   --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--text);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-muted-foreground: var(--muted);
+  --color-accent: var(--surface);
+  --color-accent-foreground: var(--text);
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
   --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-input: var(--border);
+  --color-ring: var(--primary);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -74,8 +66,8 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
@@ -145,7 +137,7 @@ body {
   top: -40px;
   left: 6px;
   background: var(--primary);
-  color: var(--primary-foreground);
+  color: #ffffff;
   padding: 8px;
   text-decoration: none;
   border-radius: 4px;

@@ -2,27 +2,85 @@
 
 interface TagFilterProps {
   tags: string[];
-  activeTag: string;
-  onChange: (tag: string) => void;
+  activeTags: string[];
+  onChange: (tags: string[]) => void;
 }
 
-export default function TagFilter({ tags, activeTag, onChange }: TagFilterProps) {
+export default function TagFilter({ tags, activeTags, onChange }: TagFilterProps) {
+  const toggleTag = (tag: string) => {
+    if (tag === 'All') {
+      // "All" tag clears all other selections
+      onChange([]);
+    } else if (activeTags.includes(tag)) {
+      // Remove tag if already selected
+      onChange(activeTags.filter(t => t !== tag));
+    } else {
+      // Add tag if not selected
+      onChange([...activeTags, tag]);
+    }
+  };
+
+  const clearAll = () => {
+    onChange([]);
+    // Remove focus after action to prevent persistent focus ring
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
+
+  const selectAll = () => {
+    onChange(tags.filter(tag => tag !== 'All'));
+    // Remove focus after action to prevent persistent focus ring
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
+
   return (
-    <div className="flex flex-wrap justify-center gap-3 mb-12">
-      {tags.map((tag) => (
+    <div className="mb-12">
+      {/* Filter Controls */}
+      <div className="flex flex-wrap justify-center gap-3 mb-4">
         <button
-          key={tag}
-          onClick={() => onChange(tag)}
-          aria-pressed={activeTag === tag}
-          className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 ${
-            activeTag === tag
-              ? 'text-white bg-blue-600 dark:bg-blue-500 border border-blue-600 dark:border-blue-500'
-              : 'text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
-          }`}
+          onClick={clearAll}
+          className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium text-[var(--text)] bg-[var(--surface)] border border-[var(--border)] hover:bg-[var(--surface-hover)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]"
         >
-          {tag}
+          Clear All
         </button>
-      ))}
+        <button
+          onClick={selectAll}
+          className="inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium text-[var(--text)] bg-[var(--surface)] border border-[var(--border)] hover:bg-[var(--surface-hover)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--bg)]"
+        >
+          Select All
+        </button>
+      </div>
+
+      {/* Tag Buttons */}
+      <div className="flex flex-wrap justify-center gap-3">
+        {tags.map((tag) => {
+          const isActive = tag === 'All' ? activeTags.length === 0 : activeTags.includes(tag);
+          return (
+            <button
+              key={tag}
+              onClick={() => toggleTag(tag)}
+              aria-pressed={isActive}
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--bg)] ${
+                isActive
+                  ? 'text-white bg-[var(--primary)] border border-[var(--primary)] shadow-md scale-105'
+                  : 'text-[var(--text)] bg-[var(--surface)] border border-[var(--border)] hover:bg-[var(--surface-hover)] hover:scale-102'
+              }`}
+            >
+              {tag}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Active Filters Display */}
+      {activeTags.length > 0 && (
+        <div className="text-center mt-4 text-sm text-[var(--muted)]">
+          Showing content with: {activeTags.join(', ')}
+        </div>
+      )}
     </div>
   );
 }

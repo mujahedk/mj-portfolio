@@ -7,7 +7,7 @@ import TagFilter from './TagFilter';
 import { getWriteups, getAllTags, WriteupMeta } from '@/lib/mdx';
 
 export default function WriteupsContent() {
-  const [selectedTag, setSelectedTag] = useState('All');
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [writeups, setWriteups] = useState<WriteupMeta[]>([]);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,26 +33,32 @@ export default function WriteupsContent() {
     loadWriteups();
   }, []);
 
-  // Get category from URL query parameter
+  // Get tags from URL query parameter
   useEffect(() => {
-    const tag = searchParams.get('tag');
-    if (tag && allTags.includes(tag)) {
-      setSelectedTag(tag);
+    const tags = searchParams.get('tags');
+    if (tags) {
+      const tagArray = tags.split(',').filter(tag => allTags.includes(tag));
+      setSelectedTags(tagArray);
     }
   }, [searchParams, allTags]);
 
-  // Filter writeups based on selected tag
-  const filteredWriteups = selectedTag === 'All' 
+  // Filter writeups based on selected tags
+  const filteredWriteups = selectedTags.length === 0 
     ? writeups 
-    : writeups.filter(writeup => writeup.tags.includes(selectedTag));
+    : writeups.filter(writeup => 
+        selectedTags.some(tag => writeup.tags.includes(tag))
+      );
 
   // Handle tag selection
-  const handleTagSelect = (tag: string) => {
-    setSelectedTag(tag);
-    if (tag === 'All') {
+  const handleTagChange = (tags: string[]) => {
+    setSelectedTags(tags);
+    
+    if (tags.length === 0) {
+      // No tags selected = show all (equivalent to "All" tag)
       router.push('/writeups');
     } else {
-      router.push(`/writeups?tag=${tag}`);
+      const tagsParam = tags.join(',');
+      router.push(`/writeups?tags=${tagsParam}`);
     }
   };
 
@@ -64,10 +70,10 @@ export default function WriteupsContent() {
       <div className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto text-center">
           <div className="animate-pulse">
-            <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded mb-6 max-w-md mx-auto"></div>
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mb-12 max-w-2xl mx-auto"></div>
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-12 max-w-lg mx-auto"></div>
-            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded max-w-2xl mx-auto"></div>
+            <div className="h-12 bg-[var(--muted)]/20 rounded mb-6 max-w-md mx-auto"></div>
+            <div className="h-6 bg-[var(--muted)]/20 rounded mb-12 max-w-2xl mx-auto"></div>
+            <div className="h-8 bg-[var(--muted)]/20 rounded mb-12 max-w-lg mx-auto"></div>
+            <div className="h-64 bg-[var(--muted)]/20 rounded max-w-2xl mx-auto"></div>
           </div>
         </div>
       </div>
@@ -79,10 +85,10 @@ export default function WriteupsContent() {
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[var(--text)] mb-6">
             Notes & Research
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-[var(--muted)] max-w-3xl mx-auto">
             Short writeups and deeper dives on what I&apos;m building and learning — from systems and security to AI, product, and beyond.
           </p>
         </div>
@@ -90,64 +96,69 @@ export default function WriteupsContent() {
         {/* Tags Filter */}
         <TagFilter
           tags={uniqueTags}
-          activeTag={selectedTag}
-          onChange={handleTagSelect}
+          activeTags={selectedTags}
+          onChange={handleTagChange}
         />
 
         {/* Writeups List or Empty State */}
         {writeups.length === 0 ? (
           <div className="flex justify-center">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-12 text-center border border-gray-200 dark:border-gray-700 max-w-md">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-12 text-center max-w-md">
               <div className="text-6xl mb-4">📝</div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-2xl font-bold text-[var(--text)] mb-2">
                 Notes coming soon!
               </h2>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-[var(--muted)]">
                 I&apos;ll be sharing insights and research here soon.
               </p>
             </div>
           </div>
         ) : filteredWriteups.length === 0 ? (
-          <div className="text-center py-20">
-            <div className="text-6xl mb-4">🔍</div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              No notes found
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              No notes found for the selected tag.
-            </p>
+          <div className="flex justify-center">
+            <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-12 text-center max-w-md">
+              <div className="text-6xl mb-4">🔍</div>
+              <h2 className="text-2xl font-bold text-[var(--text)] mb-2">
+                No notes found
+              </h2>
+              <p className="text-[var(--muted)]">
+                {selectedTags.length === 0 
+                  ? 'No notes available yet.' 
+                  : `No notes found for the selected tags: ${selectedTags.join(', ')}`
+                }
+              </p>
+            </div>
           </div>
         ) : (
           <div className="space-y-8">
             {filteredWriteups.map((writeup) => (
               <div
                 key={writeup.slug}
-                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 dark:border-gray-700"
+                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-shadow duration-300 overflow-hidden"
               >
                 <div className="p-8">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  <h2 className="text-2xl font-bold text-[var(--text)] mb-4">
                     {writeup.title}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                  <p className="text-[var(--muted)] mb-6 text-lg">
                     {writeup.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {writeup.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/20 rounded-full"
+                        className="px-3 py-1 text-sm font-medium text-[var(--primary)] bg-[var(--primary)]/10 rounded-full"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-4 text-sm text-[var(--muted)]">
                       <span>{writeup.date}</span>
                     </div>
                     <Link
                       href={`/writeups/${writeup.slug}`}
-                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-700 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-[var(--text)] bg-[var(--surface)] border border-[var(--border)] rounded-lg hover:bg-[var(--surface-hover)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2"
                     >
                       Read More
                       <svg className="ml-2 -mr-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,15 +174,15 @@ export default function WriteupsContent() {
 
         {/* CTA Section */}
         <div className="text-center mt-20">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-2xl font-bold text-[var(--text)] mb-4">
             Want to contribute?
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <p className="text-[var(--muted)] mb-6">
             I&apos;m always looking for guest writers and collaborators to share their knowledge and insights.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+            className="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-[var(--primary)] hover:bg-[var(--primary-hover)] rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2"
           >
             Get In Touch
             <svg className="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
