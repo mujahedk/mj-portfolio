@@ -150,6 +150,8 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
             tags={project.tags}
             summary={project.summary}
             image={project.image}
+            repo={project.repo}
+            liveUrl={project.liveUrl}
           />
         ))}
       </div>
